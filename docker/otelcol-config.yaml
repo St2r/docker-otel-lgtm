@@ -22,6 +22,7 @@ extensions:
     path: "/ready"
 
 processors:
+  k8sattributes:
   batch:
 
 exporters:
@@ -53,17 +54,17 @@ service:
   pipelines:
     traces:
       receivers: [otlp]
-      processors: [batch]
+      processors: [k8sattributes, batch]
       exporters: [otlphttp/traces]
       #exporters: [otlphttp/traces,debug/traces]
     metrics:
       receivers: [otlp, prometheus/collector]
-      processors: [batch]
+      processors: [k8sattributes, batch]
       exporters: [otlphttp/metrics]
       #exporters: [otlphttp/metrics,debug/metrics]
     logs:
       receivers: [otlp]
-      processors: [batch]
+      processors: [k8sattributes, batch]
       exporters: [otlphttp/logs]
       #exporters: [otlphttp/logs,debug/logs]
     profiles:
